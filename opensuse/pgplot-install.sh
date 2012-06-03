@@ -8,20 +8,22 @@ cp pgplot5.2.tar.gz /usr/local/src
 cd /usr/local/src 
 tar -zxvf pgplot5.2.tar.gz
 
-cd pgplot 
-
 if [ ! -e ${PGPLOT_DIR} ]; then
 	mkdir ${PGPLOT_DIR} 
 fi
 
+cp ${PGPLOT_TMP}/src/grpckg1.inc grpckg1.inc.bak
+cp ${PGPLOT_TMP}/src/pgplot.inc  pgplot.inc.bak
+
+sed -i 's#PARAMETER \(GRIMAX = 8\)#PARAMETER \(GRIMAX = 32\)#' ${PGPLOT_TMP}/src/grpckg1.inc 
+sed -i 's#PARAMETER \(GRIMAX = 8\)#PARAMETER \(GRIMAX = 32\)#' ${PGPLOT_TMP}/src/pgplot.inc 
+
+#
+#
 cd ${PGPLOT_DIR}
 
 cp ${PGPLOT_TMP}/drivers.list .
-
 sed -i 's#! PNDRIV 1 /PNG#  PNDRIV 1 /PNG#' drivers.list 
-
-cp ${PGPLOT_TMP}/src/grpckg1.inc grpckg1.inc.bak
-cp ${PGPLOT_TMP}/src/pgplot.inc  pgplot.inc.bak
 
 # prepares the makefile for linux system + gcc complier
 ${PGPLOT_TMP}/makemake ${PGPLOT_TMP} linux 977_gcc 
