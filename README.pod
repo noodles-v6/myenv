@@ -1,0 +1,5 @@
+=encoding utf8
+
+=head1 for what?
+
+记录平时在mac和linux下安装特定环境时的脚本及注意点
