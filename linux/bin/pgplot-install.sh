@@ -1,5 +1,7 @@
 #!/bin/bash 
 #
+# <env> openSUSE 11.3 (x86_64)
+##
 
 PGPLOT_DIR=/usr/local/pgplot
 PGPLOT_TMP=/usr/local/src/pgplot
