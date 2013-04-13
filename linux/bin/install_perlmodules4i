@@ -12,6 +12,7 @@ my @modules= qw/
 Moo 
 Dancer
 Foo
+WWW::Wikipedia
 /;
 
 my $inst = ExtUtils::Installed->new();
