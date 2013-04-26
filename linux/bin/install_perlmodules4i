@@ -9,6 +9,7 @@ use ExtUtils::Installed;
 
 # add your modules int this array.
 my @modules= qw/
+YAML
 Moo 
 Dancer
 Foo
