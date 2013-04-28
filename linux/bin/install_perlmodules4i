@@ -14,6 +14,9 @@ Moo
 Dancer
 Foo
 WWW::Wikipedia
+csv
+Text::CSV
+Text::CSV::Slurp
 /;
 
 my $inst = ExtUtils::Installed->new();
