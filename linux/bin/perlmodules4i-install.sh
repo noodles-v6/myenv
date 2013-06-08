@@ -17,6 +17,7 @@ WWW::Wikipedia
 csv
 Text::CSV
 Text::CSV::Slurp
+Perl::Tidy
 /;
 
 my $inst = ExtUtils::Installed->new();
