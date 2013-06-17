@@ -19,6 +19,7 @@ Text::CSV
 Text::CSV::Slurp
 Perl::Tidy
 Data::Printer
+Here::Template
 /;
 
 my $inst = ExtUtils::Installed->new();
