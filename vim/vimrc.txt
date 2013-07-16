@@ -1,5 +1,8 @@
 " Vimrc file, http://phuzz.org
-   
+
+set textwidth=80
+set wrap
+set linebreak
 set nocompatible    " use vim defaults
 set ls=2            " allways show status line
 set tabstop=4       " numbers of spaces of tab character
