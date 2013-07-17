@@ -1,14 +1,15 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 
 use v5.12;
 use warnings;
 use strict;
 use DateTime;
-use Log::Trace log => '/var/log/simplify-mylife.log';
+use Log::Trace log => '/var/log/limit-qq.log';
 
 our $qq_launched_in_memory = 0;
 our $latest_launch_time = get_qq_today_launch_time();
 
+clear_old_log();
 monitor_qq();
 
 ######################
@@ -40,8 +41,12 @@ sub monitor_qq {
     }
 }
 
+sub clear_old_log {
+
+}
+
 sub get_qq_today_launch_time {
-    open my $fh, "/var/log/simplify-mylife.log"
+    open my $fh, "/var/log/limit-qq.log"
         or return 0; #seconds
 
     my $today = DateTime->today(time_zone=>'local');
