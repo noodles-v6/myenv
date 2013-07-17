@@ -21,6 +21,7 @@ Perl::Tidy
 Data::Printer
 Here::Template
 Log::Any
+Log::Trace
 /;
 
 my $inst = ExtUtils::Installed->new();
