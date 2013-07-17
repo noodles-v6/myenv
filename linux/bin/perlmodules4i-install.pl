@@ -20,6 +20,7 @@ Text::CSV::Slurp
 Perl::Tidy
 Data::Printer
 Here::Template
+Log::Any
 /;
 
 my $inst = ExtUtils::Installed->new();
