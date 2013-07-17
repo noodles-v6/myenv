@@ -23,14 +23,8 @@ sub monitor_qq {
 
             if ($latest_launch_time > 1.5*60*60) {
                 # run applescript
-<<<<<<< HEAD
                 say `ps -ef | grep QQ | grep -v grep | awk '{print \$2}' | xargs kill -9`;
                 TRACE("QQ launch time great than 1.5 hour, force exit!!!");
-=======
-                my $kill_qq_cmd = 'ps -ef | grep QQ | grep -v grep | awk \'{print $2}\' | xargs kill -9';
-                say `$kill_qq_cmd`;
-                say $fh "$now [QQ] launch time is greater than 1.5 hour, force exit!!!";
->>>>>>> 5fc859cab0300dc359e422a894620e3b8dd1761e
                 $qq_launched_in_memory = 0;
             } else {
                 $latest_launch_time += 20 # add 20s
