@@ -49,13 +49,13 @@ sub get_qq_today_launch_time {
     open my $fh, "/var/log/limit-qq.log"
         or return 0; #seconds
 
-    my $today = DateTime->today(time_zone=>'local');
+    my $today = DateTime->today(time_zone=>'local')->ymd();
     my @logs = reverse(<$fh>);
     close $fh;
 
     for  (@logs) {
-        if (/$today.*QQ launch=(.*), total=(\d+)/) {
-            return $2; 
+        if (/.*$today.*total=(\d+)/) {
+            return $1; 
         }
     }
 
