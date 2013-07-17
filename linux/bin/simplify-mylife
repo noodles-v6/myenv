@@ -1,0 +1,68 @@
+#!/usr/bin/perl
+
+use v5.12;
+use warnings;
+use strict;
+use DateTime;
+
+our $qq_launched_in_memory = 0;
+our $latest_launch_time = get_qq_today_launch_time();
+
+monitor_qq();
+
+######################
+
+sub monitor_qq {
+    while (1) {
+        open my $fh, ">>/var/log/simplify-mylife.log" 
+            or die "$!";
+    
+        my $now = DateTime->now(time_zone=>'local');
+        if (is_qq_launch()) {    
+            if (!$qq_launched_in_memory) {
+                say $fh "$now [QQ] launch=start, total=$latest_launch_time seconds";
+                $qq_launched_in_memory = 1;
+            }
+
+            if ($latest_launch_time > 1.5*60*60) {
+                # run applescript
+                my $kill_qq_cmd = 'ps -ef | grep QQ | grep -v grep | awk \'{print $2}\' | xargs kill -9';
+                say `$kill_qq_cmd`;
+                say $fh "$now qq launch time great than 1.5 hour, force exit!!!";
+                $qq_launched_in_memory = 0;
+            } else {
+                $latest_launch_time += 20 # add 20s
+            }
+        } else {
+            if ($qq_launched_in_memory) {
+                say $fh "$now [QQ] launch=stop, total=$latest_launch_time seconds";
+                $qq_launched_in_memory = 0;
+            }
+        }
+
+        close $fh;
+        sleep 20;
+    }
+}
+
+sub get_qq_today_launch_time {
+    open my $fh, "/var/log/simplify-mylife.log"
+    or return 0; #seconds
+
+    my $today = DateTime->today(time_zone=>'local');
+    my @logs = reverse(<$fh>);
+    close $fh;
+
+    for  (@logs) {
+        if (/$today.*[QQ] launch=(.*), total=(\d+)/) {
+            return $2; 
+        }
+    }
+
+    0;
+}
+
+sub is_qq_launch {
+    my @out = `/bin/ps aux | grep QQ | grep -v grep`;
+    if (@out) { 1 } else { 0 }
+}
