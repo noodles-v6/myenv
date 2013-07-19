@@ -8,3 +8,6 @@ brew link dos2unix
 
 brew install -g mysql
 brew link mysql
+
+brew install ctags
+brew link ctags
