@@ -8,6 +8,7 @@ use Log::Trace log => '/var/log/limit-qq.log';
 
 our $qq_launched_in_memory = 0;
 our $latest_launch_time = get_qq_today_launch_time();
+our $start_date = DateTime->today(time_zone=>'local')->ymd();
 
 clear_old_log();
 monitor_qq();
@@ -16,6 +17,11 @@ monitor_qq();
 
 sub monitor_qq {
     while (1) {
+        # clean if coming to next day.
+        my $today = DateTime->today(time_zone=>'local')->ymd();
+        $latest_launch_time = 0 if $today ne $start_date;
+
+        # check qq status.
         if (is_qq_launch()) {    
             if (!$qq_launched_in_memory) {
                 TRACE("QQ launch=start, total=$latest_launch_time seconds");
