@@ -11,3 +11,5 @@ brew link mysql
 
 brew install ctags
 brew link ctags
+
+sudo port install watch
