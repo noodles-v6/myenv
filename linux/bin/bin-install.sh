@@ -13,3 +13,4 @@ brew install ctags
 brew link ctags
 
 sudo port install watch
+sudo port install tree
